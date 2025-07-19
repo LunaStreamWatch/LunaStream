@@ -1,22 +1,23 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Film, Archive, Home, Search } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import type React from "react"
+import { Link, useLocation } from "react-router-dom"
+import { Film, Archive, Home, Search, TrendingUp, User } from "lucide-react"
+import ThemeToggle from "./ThemeToggle"
 
 const GlobalNavbar: React.FC = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   const isActive = (path: string) => {
-    if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
-    return false;
-  };
+    if (path === "/" && location.pathname === "/") return true
+    if (path !== "/" && location.pathname.startsWith(path)) return true
+    return false
+  }
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { path: '/search', label: 'Search', icon: Search },
-    { path: '/vault', label: 'Vault', icon: Archive },
-  ];
+    { path: "/", label: "Home", icon: Home },
+    { path: "/search", label: "Search", icon: Search },
+    { path: "/recommendations", label: "Recommendations", icon: TrendingUp },
+    { path: "/vault", label: "Vault", icon: Archive },
+  ]
 
   return (
     <nav className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border-b border-pink-200/50 dark:border-gray-600/30 sticky top-0 z-50 transition-all duration-300">
@@ -35,53 +36,67 @@ const GlobalNavbar: React.FC = () => {
           {/* Navigation Items */}
           <div className="hidden md:flex items-center space-x-1 absolute left-1/2 transform -translate-x-1/2">
             {navItems.map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
                     isActive(item.path)
-                      ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg'
-                      : 'text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400'
+                      ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                      : "text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{item.label}</span>
                 </Link>
-              );
+              )
             })}
           </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-1 ml-auto z-10">
             {navItems.map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={`p-2 rounded-lg transition-all duration-200 ${
                     isActive(item.path)
-                      ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg'
-                      : 'text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400'
+                      ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                      : "text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400"
                   }`}
                   title={item.label}
                 >
                   <Icon className="w-5 h-5" />
                 </Link>
-              );
+              )
             })}
           </div>
 
-          {/* Theme Toggle */}
-          <div className="flex items-center ml-auto z-10">
+          {/* Right side items */}
+          <div className="flex items-center ml-auto space-x-2 z-10">
+            {/* Profile Link */}
+            <Link
+              to="/profile"
+              className={`p-2 rounded-lg transition-all duration-200 ${
+                isActive("/profile")
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                  : "text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400"
+              }`}
+              title="Profile"
+            >
+              <User className="w-5 h-5" />
+            </Link>
+
+            {/* Theme Toggle */}
             <ThemeToggle />
           </div>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default GlobalNavbar;
+export default GlobalNavbar

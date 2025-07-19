@@ -1,51 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import SearchResults from './components/SearchResults';
-import MovieDetail from './components/MovieDetail';
-import TVDetail from './components/TVDetail';
-import LastUpdated from './components/LastUpdated';
-import DonatePage from './components/DonatePage';
-import VersionPage from './components/VersionPage';
-import AdminLogin from './components/AdminLogin';
-import AdminPanel from './components/AdminPanel';
-import CustomCursor from './components/CustomCursor';
-import NotFoundPage from './components/NotFoundPage';
-import ScrollToTopButton from './components/ScrollToTop';
-import Watchlist from './components/Watchlist';
-import Vault from './components/Vault'
+"use client"
+
+import { useState, useEffect } from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import HomePage from "./components/HomePage"
+import SearchResults from "./components/SearchResults"
+import MovieDetail from "./components/MovieDetail"
+import TVDetail from "./components/TVDetail"
+import LastUpdated from "./components/LastUpdated"
+import DonatePage from "./components/DonatePage"
+import VersionPage from "./components/VersionPage"
+import AdminLogin from "./components/AdminLogin"
+import AdminPanel from "./components/AdminPanel"
+import NotFoundPage from "./components/NotFoundPage"
+import ScrollToTopButton from "./components/ScrollToTop"
+import Watchlist from "./components/Watchlist"
+import Vault from "./components/Vault"
+import RecommendationsPage from "./components/RecommendationsPage"
+import UserProfile from "./components/UserProfile"
 
 function App() {
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
 
   useEffect(() => {
     // Check if admin is already authenticated
     const checkAuth = async () => {
-      const isLocalAuth = localStorage.getItem('lunastream-admin-auth') === 'true';
+      const isLocalAuth = localStorage.getItem("lunastream-admin-auth") === "true"
       if (isLocalAuth) {
         // Verify with server
-        const { authService } = await import('./services/auth');
-        const verification = await authService.verifyToken();
-        setIsAdminAuthenticated(verification.success);
+        const { authService } = await import("./services/auth")
+        const verification = await authService.verifyToken()
+        setIsAdminAuthenticated(verification.success)
         if (!verification.success) {
           // Clear invalid auth
-          localStorage.removeItem('lunastream-admin-auth');
+          localStorage.removeItem("lunastream-admin-auth")
         }
       } else {
-        setIsAdminAuthenticated(false);
+        setIsAdminAuthenticated(false)
       }
-    };
-    
-    checkAuth();
-  }, []);
+    }
+
+    checkAuth()
+  }, [])
 
   const handleAdminLogin = () => {
-    setIsAdminAuthenticated(true);
-  };
+    setIsAdminAuthenticated(true)
+  }
 
   const handleAdminLogout = () => {
-    setIsAdminAuthenticated(false);
-  };
+    setIsAdminAuthenticated(false)
+  }
 
   return (
     <Router>
@@ -60,7 +63,7 @@ function App() {
         <Route path="/v" element={<VersionPage />} />
         <Route path="/last-updated" element={<LastUpdated />} />
         <Route path="/donate" element={<DonatePage />} />
-        <Route 
+        <Route
           path="/admin"
           element={
             isAdminAuthenticated ? (
@@ -68,14 +71,16 @@ function App() {
             ) : (
               <AdminLogin onLogin={handleAdminLogin} />
             )
-          } 
+          }
         />
         <Route path="/vault" element={<Vault />} />
         <Route path="/watchlist" element={<Watchlist />} /> {/* Redirects to /vault */}
+        <Route path="/recommendations" element={<RecommendationsPage />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App; 
+export default App
