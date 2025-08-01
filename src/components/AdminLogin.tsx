@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Film, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { authService } from '../services/auth';
 import GlobalNavbar from './GlobalNavbar';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -14,6 +16,9 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -25,10 +30,10 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
       if (result.success) {
         onLogin();
       } else {
-        setError(result.message || 'Invalid username or password');
+        setError(result.message || t.admin_login_invalid_credentials || 'Invalid username or password');
       }
     } catch (error) {
-      setError('Network error. Please try again.');
+      setError(t.admin_login_network_error || 'Network error. Please try again.');
     }
 
     setLoading(false);
@@ -48,11 +53,11 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
             <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              LunaStream Admin
+              {t.admin_login_title || 'LunaStream Admin'}
             </span>
           </h1>
           <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
-            Access the analytics dashboard
+            {t.admin_login_subtitle || 'Access the analytics dashboard'}
           </p>
         </div>
 
@@ -68,7 +73,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                     {/* Username Field */}
                     <div>
                     <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                        Username
+                        {t.admin_login_username_label || 'Username'}
                     </label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -80,7 +85,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/50 dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors duration-300"
-                        placeholder="Enter username"
+                        placeholder={t.admin_login_username_placeholder || 'Enter username'}
                         required
                         />
                     </div>
@@ -89,7 +94,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                     {/* Password Field */}
                     <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
-                        Password
+                        {t.admin_login_password_label || 'Password'}
                     </label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -101,7 +106,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="block w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/50 dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors duration-300"
-                        placeholder="Enter password"
+                        placeholder={t.admin_login_password_placeholder || 'Enter password'}
                         required
                         />
                         <button
@@ -134,19 +139,21 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                     {loading ? (
                         <div className="flex items-center justify-center">
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        Signing in...
+                        {t.admin_login_signing_in || 'Signing in...'}
                         </div>
                     ) : (
-                        'Sign In'
+                        t.admin_login_sign_in || 'Sign In'
                     )}
                     </button>
                 </form>
 
                 {/* Security Notice - styled for consistency */}
                 <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg transition-colors duration-300">
-                    <h3 className="text-blue-800 dark:text-blue-300 font-semibold text-sm mb-2 transition-colors duration-300">Secure Access</h3>
+                    <h3 className="text-blue-800 dark:text-blue-300 font-semibold text-sm mb-2 transition-colors duration-300">
+                        {t.admin_login_secure_access || 'Secure Access'}
+                    </h3>
                     <p className="text-blue-600 dark:text-blue-400 text-sm transition-colors duration-300">
-                    This admin panel provides access to real-time analytics and user data. Please ensure you have proper authorization.
+                        {t.admin_login_security_notice || 'This admin panel provides access to real-time analytics and user data. Please ensure you have proper authorization.'}
                     </p>
                 </div>
             </div>

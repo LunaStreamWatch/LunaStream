@@ -5,6 +5,8 @@ import { analytics, ViewingStats, StreamingSession } from '../services/analytics
 import { authService } from '../services/auth';
 import { tmdb } from '../services/tmdb';
 import GlobalNavbar from './GlobalNavbar';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 interface AdminPanelProps {
   onLogout: () => void;
@@ -16,6 +18,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
   const [activeTab, setActiveTab] = useState<'overview' | 'content' | 'users'>('overview');
   const [serverData, setServerData] = useState<any>(null);
+
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const fetchStats = async () => {
     setLoading(true);
@@ -107,11 +112,11 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                Admin Dashboard
+                {t.admin_panel_dashboard_title || 'Admin Dashboard'}
               </h1>
               <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-200">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>Live Data</span>
+                <span>{t.admin_panel_live_data || 'Live Data'}</span>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -121,14 +126,14 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                 className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
               >
                 <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                <span>Refresh</span>
+                <span>{t.admin_panel_refresh || 'Refresh'}</span>
               </button>
               <button
                 onClick={onLogout}
                 className="flex items-center space-x-2 text-gray-600 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 transition-colors px-4 py-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                <span>{t.admin_panel_logout || 'Logout'}</span>
               </button>
             </div>
           </div>
@@ -140,14 +145,14 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
             <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              Real-Time Analytics Dashboard
+              {t.admin_panel_analytics_title || 'Real-Time Analytics Dashboard'}
             </span>
           </h1>
           <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
-            Live streaming analytics and comprehensive user insights
+            {t.admin_panel_analytics_subtitle || 'Live streaming analytics and comprehensive user insights'}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors duration-300">
-            Last updated: {lastUpdate.toLocaleTimeString()} • Auto-refresh every 15s
+            {t.admin_panel_last_updated || 'Last updated'}: {lastUpdate.toLocaleTimeString()} • {t.admin_panel_auto_refresh || 'Auto-refresh every 15s'}
           </p>
         </div>
 
@@ -156,9 +161,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-2 transition-colors duration-300">
             <div className="flex space-x-2">
               {[
-                { id: 'overview', label: 'Overview', icon: BarChart3 },
-                { id: 'content', label: 'Content', icon: Film },
-                { id: 'users', label: 'Users', icon: Users },
+                { id: 'overview', label: t.admin_panel_tab_overview || 'Overview', icon: BarChart3 },
+                { id: 'content', label: t.admin_panel_tab_content || 'Content', icon: Film },
+                { id: 'users', label: t.admin_panel_tab_users || 'Users', icon: Users },
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -190,7 +195,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">Total Views</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_total_views || 'Total Views'}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{formatNumber(stats.totalViews)}</p>
                         <p className="text-xs text-green-600 dark:text-green-400 mt-1">+12% from last week</p>
                       </div>
@@ -203,7 +208,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">Live Viewers</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_live_viewers || 'Live Viewers'}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{stats.currentlyWatching.length}</p>
                         {/* <p className="text-xs text-green-600 dark:text-green-400 mt-1">Peak: {stats.peakConcurrentViewers}</p> */}
                       </div>
@@ -216,7 +221,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-indigo-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">Watch Time</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_watch_time || 'Watch Time'}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{formatDuration(stats.totalWatchTime)}</p>
                         <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">Avg: {formatDuration(stats.averageSessionLength)}</p>
                       </div>
@@ -229,7 +234,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">Completion Rate</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_completion_rate || 'Completion Rate'}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{stats.averageWatchProgress.toFixed(1)}%</p>
                         <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">Bounce: {stats.bounceRate.toFixed(1)}%</p>
                       </div>
@@ -244,7 +249,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                 <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 mb-8 transition-colors duration-300">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300">
                     <Monitor className="w-7 h-7 mr-3 text-green-500" />
-                    Live Viewers ({stats.currentlyWatching.length})
+                    {t.admin_panel_live_viewers_title || 'Live Viewers'} ({stats.currentlyWatching.length})
                     <div className="ml-3 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                   </h2>
                   
@@ -313,7 +318,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   ) : (
                     <div className="text-center py-8">
                       <Monitor className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4 transition-colors duration-300" />
-                      <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">No one is currently watching</p>
+                      <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_no_one_watching || 'No one is currently watching'}</p>
                     </div>
                   )}
                 </div>
@@ -322,7 +327,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                 <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-indigo-200/50 dark:border-gray-700/50 p-6 mb-8 transition-colors duration-300">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300">
                     <LineChart className="w-7 h-7 mr-3 text-indigo-500" />
-                    7-Day Activity Trends
+                    {t.admin_panel_activity_trends || '7-Day Activity Trends'}
                   </h2>
                   
                   <div className="space-y-4">
@@ -341,8 +346,8 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                               })}
                             </span>
                             <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                              <span>{day.views} views</span>
-                              <span>{day.uniqueViewers} viewers</span>
+                              <span>{day.views} {t.admin_panel_views || 'views'}</span>
+                              <span>{day.uniqueViewers} {t.admin_panel_viewers || 'viewers'}</span>
                               <span>{formatDuration(day.watchTime)}</span>
                               {/*<span className="text-green-600 dark:text-green-400">Peak: {day.peakConcurrent}</span>*/}
                             </div>
@@ -368,7 +373,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                 <div className="grid lg:grid-cols-4 gap-6 mb-8">
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Most Watched</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t.admin_panel_most_watched || 'Most Watched'}</h3>
                       <Award className="w-5 h-5 text-pink-500" />
                     </div>
                     <div className="space-y-2">
@@ -385,7 +390,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Longest Sessions</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t.admin_panel_longest_sessions || 'Longest Sessions'}</h3>
                       <Clock className="w-5 h-5 text-purple-500" />
                     </div>
                     <div className="space-y-2">
@@ -402,7 +407,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-green-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Best Completion</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t.admin_panel_best_completion || 'Best Completion'}</h3>
                       <CheckCircle className="w-5 h-5 text-green-500" />
                     </div>
                     <div className="space-y-2">
@@ -419,7 +424,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Most Rewatched</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t.admin_panel_most_rewatched || 'Most Rewatched'}</h3>
                       <Repeat className="w-5 h-5 text-orange-500" />
                     </div>
                     <div className="space-y-2">
@@ -441,7 +446,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300">
                       <Film className="w-7 h-7 mr-3 text-pink-500" />
-                      Top Movies
+                      {t.admin_panel_top_movies || 'Top Movies'}
                     </h2>
                     
                     {stats.topMovies.length > 0 ? (
@@ -492,7 +497,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                     ) : (
                       <div className="text-center py-8">
                         <Film className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4 transition-colors duration-300" />
-                        <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">No movie data available</p>
+                        <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_no_movie_data || 'No movie data available'}</p>
                       </div>
                     )}
                   </div>
@@ -501,7 +506,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300">
                       <Tv className="w-7 h-7 mr-3 text-purple-500" />
-                      Top TV Shows
+                      {t.admin_panel_top_tv_shows || 'Top TV Shows'}
                     </h2>
                     
                     {stats.topTVShows.length > 0 ? (
@@ -556,7 +561,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                     ) : (
                       <div className="text-center py-8">
                         <Tv className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4 transition-colors duration-300" />
-                        <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">No TV show data available</p>
+                        <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">{t.admin_panel_no_tv_data || 'No TV show data available'}</p>
                       </div>
                     )}
                   </div>
@@ -572,23 +577,23 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Users className="w-5 h-5 mr-2 text-blue-500" />
-                      User Engagement
+                      {t.admin_panel_user_engagement || 'User Engagement'}
                     </h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-300">Avg Sessions/User</span>
+                        <span className="text-gray-600 dark:text-gray-300">{t.admin_panel_avg_sessions_user || 'Avg Sessions/User'}</span>
                         <span className="font-semibold text-gray-900 dark:text-white">
                           {stats.userEngagement.averageSessionsPerUser.toFixed(1)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-300">Avg Time/User</span>
+                        <span className="text-gray-600 dark:text-gray-300">{t.admin_panel_avg_time_user || 'Avg Time/User'}</span>
                         <span className="font-semibold text-gray-900 dark:text-white">
                           {formatDuration(stats.userEngagement.averageTimePerUser)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-300">Return Rate</span>
+                        <span className="text-gray-600 dark:text-green-400">{t.admin_panel_return_rate || 'Return Rate'}</span>
                         <span className="font-semibold text-green-600 dark:text-green-400">
                           {stats.userEngagement.returnUserRate.toFixed(1)}%
                         </span>
@@ -599,7 +604,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-green-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <PieChart className="w-5 h-5 mr-2 text-green-500" />
-                      Device Distribution
+                      {t.admin_panel_device_distribution || 'Device Distribution'}
                     </h3>
                     <div className="space-y-3">
                       {Object.entries(stats.deviceStats).map(([device, count]) => {
@@ -631,7 +636,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <BarChart3 className="w-5 h-5 mr-2 text-purple-500" />
-                      Session Duration
+                      {t.admin_panel_session_duration || 'Session Duration'}
                     </h3>
                     <div className="space-y-3">
                       {stats.userEngagement.sessionDistribution.map((dist) => (
@@ -659,7 +664,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Globe className="w-5 h-5 mr-2 text-orange-500" />
-                      Browser Distribution
+                      {t.admin_panel_browser_distribution || 'Browser Distribution'}
                     </h3>
                     <div className="space-y-3">
                       {stats.browserStats.slice(0, 6).map((browser) => (
@@ -684,7 +689,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-teal-200/50 dark:border-gray-700/50 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Settings className="w-5 h-5 mr-2 text-teal-500" />
-                      Operating System
+                      {t.admin_panel_operating_system || 'Operating System'}
                     </h3>
                     <div className="space-y-3">
                       {stats.osStats.slice(0, 6).map((os) => (
