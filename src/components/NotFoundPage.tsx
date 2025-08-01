@@ -1,8 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import GlobalNavbar from './GlobalNavbar';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 function NotFoundPage() {
   const canvasRef = useRef(null);
+  const { language } = useLanguage();
+  const t = translations[language] || translations.en;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -115,31 +119,31 @@ function NotFoundPage() {
             color: 'transparent',
             textShadow: `0 0 10px ${gradient}`,
           }}>
-            404
+            {t.error_404_title}
           </h1>
           <p style={{
             fontSize: '1.5em',
             color: '#fff',
             marginBottom: '2rem',
           }}>
-            Page Not Found
+            {t.error_404_message}
           </p>
-          <a
-            href="/"
-            style={{
-              display: 'inline-block',
-              padding: '10px 20px',
-              fontSize: '1em',
-              color: '#fff',
-              background: `linear-gradient(90deg, ${gradientColors.join(', ')})`,
-              borderRadius: '4px',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              boxShadow: `0 0 10px ${gradient}`,
-            }}
-          >
-            Go Home
-          </a>
+                      <a
+              href="/"
+              style={{
+                display: 'inline-block',
+                padding: '10px 20px',
+                fontSize: '1em',
+                color: '#fff',
+                background: `linear-gradient(90deg, ${gradientColors.join(', ')})`,
+                borderRadius: '4px',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                boxShadow: `0 0 10px ${gradient}`,
+              }}
+            >
+              {t.error_404_go_home}
+            </a>
         </div>
       </div>
       </div>

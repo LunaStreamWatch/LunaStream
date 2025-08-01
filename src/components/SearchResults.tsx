@@ -314,7 +314,7 @@ const SearchResults: React.FC = () => {
                     </h3>
                     <p className="text-xs text-gray-600 dark:text-gray-400 flex items-center space-x-1 mt-1">
                       <Calendar className="w-3 h-3" />
-                      <span>{getDate(item) || 'N/A'}</span>
+                      <span>{getDate(item) || t.content_n_a}</span>
                     </p>
                     <p className="text-xs text-yellow-500 flex items-center space-x-1 mt-1">
                       <Star className="w-3 h-3" />

@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, ChevronsLeft, ChevronsRight } from 'lucide-react
 import { tmdb } from '../services/tmdb';
 import { Link } from 'react-router-dom';
 import GlobalNavbar from './GlobalNavbar';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 interface MediaItem {
   id: number;
@@ -27,6 +29,8 @@ const ComingSoon: React.FC = () => {
   const [inputPage, setInputPage] = useState<string>('1');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const { language } = useLanguage();
+  const t = translations[language] || translations.en;
 
   // Fetch all pages of movies and TV shows on mount
   useEffect(() => {
@@ -81,7 +85,7 @@ const ComingSoon: React.FC = () => {
         setLoading(false);
       } catch (err) {
         console.error('Error fetching coming soon:', err);
-        setError('Failed to load upcoming titles.');
+        setError(t.status_failed_to_load);
         setLoading(false);
       }
     };
@@ -202,11 +206,11 @@ const ComingSoon: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="text-center py-20 text-gray-700 dark:text-gray-300">Loading...</div>
+          <div className="text-center py-20 text-gray-700 dark:text-gray-300">{t.status_loading}</div>
         ) : error ? (
           <div className="text-center text-red-500">{error}</div>
         ) : paginatedResults.length === 0 ? (
-          <div className="text-center text-gray-500 dark:text-gray-400">No upcoming content found.</div>
+          <div className="text-center text-gray-500 dark:text-gray-400">{t.status_no_upcoming_content}</div>
         ) : (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
@@ -233,7 +237,7 @@ const ComingSoon: React.FC = () => {
                         {title}
                       </h3>
                       <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        <span>{date ? new Date(date).toLocaleDateString() : 'TBA'}</span>
+                        <span>{date ? new Date(date).toLocaleDateString() : t.content_tba}</span>
                         <span>★ {item.vote_average.toFixed(1)}</span>
                       </div>
                     </div>
@@ -248,7 +252,7 @@ const ComingSoon: React.FC = () => {
                 onClick={handleFirstPage}
                 disabled={page === 1 || loading}
                 className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full shadow disabled:opacity-40"
-                title="First Page"
+                title={t.nav_first_page}
               >
                 <ChevronsLeft size={18} />
               </button>
@@ -257,11 +261,11 @@ const ComingSoon: React.FC = () => {
                 disabled={page === 1 || loading}
                 className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full shadow disabled:opacity-40"
               >
-                <ArrowLeft className="inline-block mr-2" size={18} /> Prev
+                <ArrowLeft className="inline-block mr-2" size={18} /> {t.coming_soon_prev}
               </button>
 
               <span className="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                Page
+                {t.nav_page}
                 <input
                   type="text"
                   inputMode="numeric"
@@ -274,7 +278,7 @@ const ComingSoon: React.FC = () => {
                   disabled={loading}
                   ref={inputRef}
                 />
-                of {totalPages}
+                {t.nav_of} {totalPages}
               </span>
 
               <button
@@ -282,13 +286,13 @@ const ComingSoon: React.FC = () => {
                 disabled={page === totalPages || loading}
                 className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full shadow disabled:opacity-40"
               >
-                Next <ArrowRight className="inline-block ml-2" size={18} />
+                {t.coming_soon_next} <ArrowRight className="inline-block ml-2" size={18} />
               </button>
               <button
                 onClick={handleLastPage}
                 disabled={page === totalPages || loading}
                 className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full shadow disabled:opacity-40"
-                title="Last Page"
+                title={t.nav_last_page}
               >
                 <ChevronsRight size={18} />
               </button>

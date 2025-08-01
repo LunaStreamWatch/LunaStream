@@ -161,7 +161,7 @@ const GlobalNavbar: React.FC = () => {
               }`}
             >
               <Heart className="w-4 h-4" />
-              <span>{t.donate}</span>
+              <span>{t.nav_donate}</span>
             </Link>
 
             <ThemeToggle />

@@ -211,7 +211,7 @@ const HomePage: React.FC = () => {
                       const isMovie = item.media_type === "movie"
                       const title = isMovie ? item.title : item.name
                       const releaseDate = isMovie ? item.release_date : item.first_air_date
-                      const year = releaseDate ? new Date(releaseDate).getFullYear() : "N/A"
+                      const year = releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a
 
                       return (
                         <div
@@ -258,8 +258,8 @@ const HomePage: React.FC = () => {
                                 {/* TV Show specific info */}
                                 {!isMovie && (
                                   <div className="flex items-center space-x-3 mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    <span>Seasons: {(item as any).number_of_seasons || t.content_n_a}</span>
-                                    <span>Episodes: {(item as any).number_of_episodes || t.content_n_a}</span>
+                                                                    <span>{t.content_seasons} {(item as any).number_of_seasons || t.content_n_a}</span>
+                                <span>{t.content_episodes} {(item as any).number_of_episodes || t.content_n_a}</span>
                                   </div>
                                 )}
 

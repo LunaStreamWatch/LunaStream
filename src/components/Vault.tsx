@@ -286,7 +286,7 @@ const Vault: React.FC = () => {
                       <Play className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {searchTerm ? 'No results found' : 'Your watchlist is empty'}
+                      {searchTerm ? t.vault_no_results_found : 'Your watchlist is empty'}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-200 mb-6 text-center max-w-md">
                       {searchTerm 
@@ -300,7 +300,7 @@ const Vault: React.FC = () => {
                         className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
-                        <span>{t.browse_content}</span>
+                        <span>{t.vault_browse_content}</span>
                       </Link>
                     )}
                   </div>
@@ -336,7 +336,7 @@ const Vault: React.FC = () => {
                               <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
                                 <div className="flex items-center space-x-1">
                                   <Calendar className="w-3 h-3" />
-                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : 'N/A'}</span>
+                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a}</span>
                                 </div>
                                 <div className="flex items-center space-x-1">
                                   <Star className="w-3 h-3 text-yellow-500" />
@@ -346,11 +346,11 @@ const Vault: React.FC = () => {
                               
                               <div className="flex items-center justify-between">
                                 <span className="text-xs text-gray-400 dark:text-gray-500">
-                                  {isMovie ? 'Movie' : 'TV Show'}
+                                  {isMovie ? t.content_movie_singular : t.content_tv_singular}
                                 </span>
                                 <div className="flex items-center space-x-1">
                                   <Play className="w-3 h-3 text-pink-500" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">Watch</span>
+                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">{t.action_watch}</span>
                                 </div>
                               </div>
                             </div>
@@ -399,12 +399,12 @@ const Vault: React.FC = () => {
                       <Heart className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {searchTerm ? 'No results found' : 'No favorites yet'}
+                      {searchTerm ? t.vault_no_results_found : t.vault_no_favorites_yet}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-200 mb-6 text-center max-w-md">
                       {searchTerm 
-                        ? `No favorites match "${searchTerm}".`
-                        : 'Start adding movies and shows to your favorites by clicking the heart icon.'
+                        ? `${t.vault_no_favorites_match} "${searchTerm}".`
+                        : t.vault_start_adding_favorites
                       }
                     </p>
                     {!searchTerm && (
@@ -413,7 +413,7 @@ const Vault: React.FC = () => {
                         className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
-                        <span>{t.browse_content}</span>
+                        <span>{t.vault_browse_content}</span>
                       </Link>
                     )}
                   </div>
@@ -448,17 +448,17 @@ const Vault: React.FC = () => {
                               <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
                                 <div className="flex items-center space-x-1">
                                   <Calendar className="w-3 h-3" />
-                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : 'N/A'}</span>
+                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a}</span>
                                 </div>
                                 <div className="flex items-center space-x-1">
                                   <Star className="w-3 h-3 text-yellow-500" />
-                                  <span>{item.vote_average?.toFixed(1) || 'N/A'}</span>
+                                  <span>{item.vote_average?.toFixed(1) || t.content_n_a}</span>
                                 </div>
                               </div>
                               
                               <div className="flex items-center justify-between">
                                 <span className="text-xs text-gray-400 dark:text-gray-500">
-                                  {isMovie ? 'Movie' : 'TV Show'}
+                                  {isMovie ? t.content_movie_singular : t.content_tv_singular}
                                 </span>
                                 <div className="flex items-center space-x-1">
                                   <Heart className="w-3 h-3 text-pink-500 fill-current" />
@@ -550,7 +550,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
                       <BarChart3 className="w-5 h-5 mr-2 text-pink-500" />
-                      {t.content_breakdown}
+                      {t.vault_content_breakdown}
                     </h3>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">

@@ -1,6 +1,11 @@
 import React from 'react';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 const Footer: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language] || translations.en;
+  
   return (
     <div
       className="
@@ -20,7 +25,7 @@ const Footer: React.FC = () => {
           <a
             href="mailto:admin@lunastream.watch"
             className="bg-[#EA4335] hover:bg-[#D33B2C] text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 group"
-            title="Email us"
+            title={t.footer_email_us}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +45,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#5865F2] hover:bg-[#4752C4] text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 group"
-            title="Join our Discord"
+            title={t.footer_join_discord}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +65,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gray-900 hover:bg-gray-800 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 group"
-            title="Follow us on TikTok"
+            title={t.footer_follow_tiktok}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +100,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#1DA1F2] hover:bg-[#1A91DA] text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 group"
-            title="Follow us on Twitter"
+            title={t.footer_follow_twitter}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +120,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#0088CC] hover:bg-[#006699] text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 group"
-            title="Join our Telegram"
+            title={t.footer_join_telegram}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

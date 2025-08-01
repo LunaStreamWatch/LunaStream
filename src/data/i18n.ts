@@ -41,6 +41,10 @@ export const translations = {
     content_genre_plural: 'Genres',
     content_no_image: 'No Image',
     content_n_a: 'N/A',
+    content_seasons: 'Seasons:',
+    content_episodes: 'Episodes:',
+    content_tba: 'TBA',
+    content_breakdown: 'Content Breakdown',
     
     // Filtering and sorting
     filter_show_results: 'Showing',
@@ -62,6 +66,10 @@ export const translations = {
     // Navigation buttons
     nav_previous: 'Previous',
     nav_next: 'Next',
+    nav_first_page: 'First Page',
+    nav_last_page: 'Last Page',
+    nav_page: 'Page',
+    nav_of: 'of',
     
     // Vault
     vault_tagline: 'Your personal collection of movies, shows, and favorites',
@@ -87,6 +95,15 @@ export const translations = {
     vault_browse_trending: 'Browse Trending',
     vault_search_content: 'Search Content',
     vault_search_your_vault: 'Search your vault',
+    vault_no_results_found: 'No results found',
+    vault_no_favorites_yet: 'No favorites yet',
+    vault_no_favorites_match: 'No favorites match',
+    vault_start_adding_favorites: 'Start adding movies and shows to your favorites by clicking the heart icon.',
+    
+    // Statistics
+    movies: 'Movies',
+    tvs: 'TV Shows',
+    watched: 'Watched',
     
     // Common actions
     action_play: 'Play',
@@ -102,6 +119,8 @@ export const translations = {
     action_cancel: 'Cancel',
     action_confirm: 'Confirm',
     action_continue: 'Continue',
+    action_copy: 'Copy',
+    action_copied: 'Copied!',
     
     // Time and dates
     time_just_now: 'Just now',
@@ -120,6 +139,8 @@ export const translations = {
     status_empty: 'Empty',
     status_offline: 'You are offline',
     status_online: 'You are back online',
+    status_no_upcoming_content: 'No upcoming content found.',
+    status_failed_to_load: 'Failed to load upcoming titles.',
     
     // Confirmation dialogs
     confirm_clear_watchlist: 'Are you sure you want to clear your entire watchlist?',
@@ -135,6 +156,11 @@ export const translations = {
     accessibility_play_button: 'Play',
     accessibility_pause_button: 'Pause',
     accessibility_volume_control: 'Volume control',
+    accessibility_email_us: 'Email us',
+    accessibility_join_discord: 'Join our Discord',
+    accessibility_follow_tiktok: 'Follow us on TikTok',
+    accessibility_follow_twitter: 'Follow us on Twitter',
+    accessibility_join_telegram: 'Join our Telegram',
     
     // Admin Login
     admin_login_title: 'LunaStream Admin',
@@ -187,6 +213,45 @@ export const translations = {
     admin_panel_session_duration: 'Session Duration',
     admin_panel_browser_distribution: 'Browser Distribution',
     admin_panel_operating_system: 'Operating System',
+    
+    // 404 Page
+    error_404_title: '404',
+    error_404_message: 'Page Not Found',
+    error_404_go_home: 'Go Home',
+    
+    // Donate Page
+    donate_support_title: 'Support LunaStream',
+    donate_support_subtitle: 'Help us keep LunaStream free and available for everyone. Your donations directly support our website to provide the best streaming experience.',
+    donate_how_help_title: 'How Your Donations Help',
+    donate_domain_costs: 'Domain Costs:',
+    donate_domain_costs_desc: 'Domain renewal and alternative domains if possible.',
+    donate_development: 'Development:',
+    donate_development_desc: 'Hiring someone to help out. contact admin@lunastream.watch',
+    donate_accessibility: 'Accessibility:',
+    donate_accessibility_desc: 'Ensuring LunaStream remains free for users worldwide',
+    donate_crypto_title: 'Cryptocurrency Donations',
+    donate_crypto_desc: 'We accept donations in various cryptocurrencies. Click on any address to copy it to your clipboard.',
+    donate_copy_address: 'Copy Address',
+    donate_copied: 'Copied!',
+    donate_thank_you_title: 'Thank You for Your Support! 💜',
+    donate_thank_you_message: 'Every donation, no matter the size, makes a real difference in keeping LunaStream running and improving. We\'re grateful for your contribution to our community!',
+    
+    // Coming Soon Page
+    coming_soon_loading: 'Loading...',
+    coming_soon_no_content: 'No upcoming content found.',
+    coming_soon_error: 'Failed to load upcoming titles.',
+    coming_soon_prev: 'Prev',
+    coming_soon_next: 'Next',
+    
+    // Version Page
+    version_build_info: 'Real-time build and deployment information for LunaStream',
+    
+    // Footer
+    footer_email_us: 'Email us',
+    footer_join_discord: 'Join our Discord',
+    footer_follow_tiktok: 'Follow us on TikTok',
+    footer_follow_twitter: 'Follow us on Twitter',
+    footer_join_telegram: 'Join our Telegram',
   },
   
   dk: {
@@ -226,6 +291,10 @@ export const translations = {
     content_genre_plural: 'Genrer',
     content_no_image: 'Intet billede',
     content_n_a: '–',
+    content_seasons: 'Sæsoner:',
+    content_episodes: 'Episoder:',
+    content_tba: 'TBA',
+    content_breakdown: 'Indholdsoversigt',
     
     // Filtering and sorting
     filter_show_results: 'Viser',
@@ -247,6 +316,10 @@ export const translations = {
     // Navigation buttons
     nav_previous: 'Forrige',
     nav_next: 'Næste',
+    nav_first_page: 'Første side',
+    nav_last_page: 'Sidste side',
+    nav_page: 'Side',
+    nav_of: 'af',
     
     // Vault
     vault_tagline: 'Din personlige samling af film, serier og favoritter',
@@ -272,6 +345,15 @@ export const translations = {
     vault_browse_trending: 'Udforsk det populære',
     vault_search_content: 'Søg indhold',
     vault_search_your_vault: 'Søg dit arkiv',
+    vault_no_results_found: 'Ingen resultater fundet',
+    vault_no_favorites_yet: 'Ingen favoritter endnu',
+    vault_no_favorites_match: 'Ingen favoritter matcher',
+    vault_start_adding_favorites: 'Begynd at tilføje film og serier til dine favoritter ved at klikke på hjerteikonet.',
+    
+    // Statistics
+    movies: 'Film',
+    tvs: 'TV-serier',
+    watched: 'Set',
     
     // Common actions
     action_play: 'Afspil',
@@ -287,6 +369,8 @@ export const translations = {
     action_cancel: 'Annuller',
     action_confirm: 'Bekræft',
     action_continue: 'Fortsæt',
+    action_copy: 'Kopier',
+    action_copied: 'Kopieret!',
     
     // Time and dates
     time_just_now: 'Lige nu',
@@ -305,6 +389,8 @@ export const translations = {
     status_empty: 'Tom',
     status_offline: 'Du er offline',
     status_online: 'Du er tilbage online',
+    status_no_upcoming_content: 'Ingen kommende indhold fundet.',
+    status_failed_to_load: 'Hentning af kommende titler mislykkedes.',
     
     // Confirmation dialogs
     confirm_clear_watchlist: 'Er du sikker på, at du vil rydde hele din watchlist?',
@@ -320,6 +406,11 @@ export const translations = {
     accessibility_play_button: 'Afspil',
     accessibility_pause_button: 'Pause',
     accessibility_volume_control: 'Lydstyrke',
+    accessibility_email_us: 'Skriv til os',
+    accessibility_join_discord: 'Tilslut dig vores Discord',
+    accessibility_follow_tiktok: 'Følg os på TikTok',
+    accessibility_follow_twitter: 'Følg os på Twitter',
+    accessibility_join_telegram: 'Tilslut dig vores Telegram',
     
     // Admin Login
     admin_login_title: 'LunaStream Admin',
@@ -372,6 +463,45 @@ export const translations = {
     admin_panel_session_duration: 'Sessionsvarighed',
     admin_panel_browser_distribution: 'Browserfordeling',
     admin_panel_operating_system: 'Styresystem',
+    
+    // 404 Page
+    error_404_title: '404',
+    error_404_message: 'Side ikke fundet',
+    error_404_go_home: 'Gå hjem',
+    
+    // Donate Page
+    donate_support_title: 'Støt LunaStream',
+    donate_support_subtitle: 'Hjælp os med at holde LunaStream gratis og tilgængelig for alle. Dine donationer støtter direkte vores hjemmeside til at levere den bedste streamingoplevelse.',
+    donate_how_help_title: 'Hvordan dine donationer hjælper',
+    donate_domain_costs: 'Domæneomkostninger:',
+    donate_domain_costs_desc: 'Domænefornyelse og alternative domæner hvis muligt.',
+    donate_development: 'Udvikling:',
+    donate_development_desc: 'Ansættelse af nogen til at hjælpe. kontakt admin@lunastream.watch',
+    donate_accessibility: 'Tilgængelighed:',
+    donate_accessibility_desc: 'Sikrer at LunaStream forbliver gratis for brugere verden over',
+    donate_crypto_title: 'Kryptovaluta-donationer',
+    donate_crypto_desc: 'Vi accepterer donationer i forskellige kryptovalutaer. Klik på enhver adresse for at kopiere den til dit udklipsholder.',
+    donate_copy_address: 'Kopier adresse',
+    donate_copied: 'Kopieret!',
+    donate_thank_you_title: 'Tak for din støtte! 💜',
+    donate_thank_you_message: 'Hver donation, uanset størrelse, gør en reel forskel i at holde LunaStream kørende og forbedre. Vi er taknemmelige for dit bidrag til vores fællesskab!',
+    
+    // Coming Soon Page
+    coming_soon_loading: 'Indlæser...',
+    coming_soon_no_content: 'Ingen kommende indhold fundet.',
+    coming_soon_error: 'Hentning af kommende titler mislykkedes.',
+    coming_soon_prev: 'Forrige',
+    coming_soon_next: 'Næste',
+    
+    // Version Page
+    version_build_info: 'Realtids build- og deployment-information for LunaStream',
+    
+    // Footer
+    footer_email_us: 'Skriv til os',
+    footer_join_discord: 'Tilslut dig vores Discord',
+    footer_follow_tiktok: 'Følg os på TikTok',
+    footer_follow_twitter: 'Følg os på Twitter',
+    footer_join_telegram: 'Tilslut dig vores Telegram',
   },
 };
 

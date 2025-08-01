@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { github, GitHubCommit, GitHubRepo } from '../services/github';
 import GlobalNavbar from './GlobalNavbar';
+import { useLanguage } from './LanguageContext';
+import { translations } from '../data/i18n';
 
 const VersionPage: React.FC = () => {
   const [commitInfo, setCommitInfo] = useState<GitHubCommit | null>(null);
@@ -23,6 +25,8 @@ const VersionPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const { language } = useLanguage();
+  const t = translations[language] || translations.en;
 
   const GITHUB_OWNER = 'Waitlists'; // Replace with your GitHub username
   const GITHUB_REPO = 'lunastream'; // Replace with your repository name
@@ -121,7 +125,7 @@ const VersionPage: React.FC = () => {
             </span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300">
-            Real-time build and deployment information for LunaStream
+            {t.version_build_info}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 transition-colors duration-300">
             Last refreshed: {formatDate(lastRefresh)}
