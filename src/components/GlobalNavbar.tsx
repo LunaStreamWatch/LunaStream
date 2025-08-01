@@ -20,11 +20,11 @@ const GlobalNavbar: React.FC = () => {
 
   // Define nav items with translated labels
   const navItems = [
-    { path: '/', label: t.home, icon: Home },
-    { path: '/search', label: t.search, icon: Search },
-    { path: '/discover', label: t.discover, icon: Compass },
-    // { path: '/soon', label: t.coming_soon, icon: Calendar }, // optional
-    { path: '/vault', label: t.vault, icon: Archive },
+    { path: '/', label: t.nav_home, icon: Home },
+    { path: '/search', label: t.nav_search, icon: Search },
+    { path: '/discover', label: t.nav_discover, icon: Compass },
+    // { path: '/soon', label: t.home_coming_soon, icon: Calendar }, // optional
+    { path: '/vault', label: t.nav_vault, icon: Archive },
   ];
 
   // Custom Language Selector component (inside same file)

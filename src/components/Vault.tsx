@@ -162,9 +162,9 @@ const Vault: React.FC = () => {
   };
 
   const tabs = [
-    { id: 'watchlist', label: t.watchlist, icon: Play, count: combinedItems.length },
-    { id: 'favorites', label: t.favorites, icon: Heart, count: stats.totalFavorites },
-    { id: 'stats', label: t.statistics, icon: BarChart3, count: null },
+            { id: 'watchlist', label: t.vault_watchlist, icon: Play, count: combinedItems.length },
+        { id: 'favorites', label: t.vault_favorites, icon: Heart, count: stats.totalFavorites },
+        { id: 'stats', label: t.vault_statistics, icon: BarChart3, count: null },
   ];
 
   return (
@@ -178,7 +178,7 @@ const Vault: React.FC = () => {
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  {t.my_c} {t.vault}
+                  {t.vault_my_content} {t.nav_vault}
                 </span>
               </h1>
               <p className="text-gray-600 dark:text-gray-200">
@@ -195,7 +195,7 @@ const Vault: React.FC = () => {
                   onChange={(e) => setCategoryFilter(e.target.value || null)}
                   className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200 appearance-none"
                 >
-                  <option value="">{t.all}</option>
+                  <option value="">{t.filter_all}</option>
                   <option value="Movie">{t.movies}</option>
                   <option value="TV Show">{t.tvs}</option>
                 </select>
@@ -267,7 +267,7 @@ const Vault: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    {t.recently_watched} ({filteredItems.length})
+                    {t.vault_recently_watched} ({filteredItems.length})
                   </h2>
                   {combinedItems.length > 0 && (
                     <button
@@ -275,7 +275,7 @@ const Vault: React.FC = () => {
                       className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       <Trash2 className="w-4 h-4" />
-                      <span className="hidden sm:inline">{t.clear_all_1}</span>
+                      <span className="hidden sm:inline">{t.vault_clear_all_watchlist}</span>
                     </button>
                   )}
                 </div>
@@ -380,7 +380,7 @@ const Vault: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    {t.favorites} ({filteredFavorites.length})
+                    {t.vault_favorites} ({filteredFavorites.length})
                   </h2>
                   {(favoriteMovies.length > 0 || favoriteShows.length > 0) && (
                     <button
@@ -388,7 +388,7 @@ const Vault: React.FC = () => {
                       className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       <Trash2 className="w-4 h-4" />
-                      <span className="hidden sm:inline">{t.clear_all_1}</span>
+                      <span className="hidden sm:inline">{t.vault_clear_all_favorites}</span>
                     </button>
                   )}
                 </div>
@@ -462,7 +462,7 @@ const Vault: React.FC = () => {
                                 </span>
                                 <div className="flex items-center space-x-1">
                                   <Heart className="w-3 h-3 text-pink-500 fill-current" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">{t.favorite}</span>
+                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">{t.vault_favorite}</span>
                                 </div>
                               </div>
                             </div>
@@ -491,7 +491,7 @@ const Vault: React.FC = () => {
             {activeTab === 'stats' && (
               <div className="space-y-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {t.vault_statistics}
+                  {t.vault_statistics_title}
                 </h2>
 
                 {/* Overview Stats */}
@@ -499,7 +499,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.total} {t.watched}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.vault_total} {t.vault_watched}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalWatched}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
@@ -511,7 +511,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.total} {t.favorites}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.vault_total} {t.vault_favorites}</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalFavorites}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -583,7 +583,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
                       <Heart className="w-5 h-5 mr-2 text-purple-500" />
-                      {t.favorites}{t.breakdown}
+                      {t.vault_favorites}{t.vault_breakdown}
                     </h3>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">

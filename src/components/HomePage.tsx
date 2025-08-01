@@ -106,7 +106,7 @@ const HomePage: React.FC = () => {
         setTrendingMovies(moviesData.results?.slice(0, 12) || [])
         setTrendingTV(tvData.results?.slice(0, 12) || [])
       } catch (error) {
-        console.error(t.trending_content_fetch_fail, error)
+        console.error(t.home_trending_fetch_error, error)
       } finally {
         setLoading(false)
       }
@@ -134,12 +134,12 @@ const HomePage: React.FC = () => {
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300 px-4">
               <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                {t.home_heading}
+                {t.home_heading_title}
               </span>
             </h1>
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto transition-colors duration-300 px-4">
-              {t.home_sub}
+              {t.home_heading_subtitle}
             </p>
             {/* Search with Suggestions */}
             <div className="max-w-2xl mx-auto relative px-4">
@@ -187,19 +187,19 @@ const HomePage: React.FC = () => {
                             .slice(0, 6)
                           setSuggestions(combined)
                         } catch (error) {
-                          console.error(t.search_fail, error)
+                          console.error(t.search_fail_error, error)
                           setSuggestions([])
                         }
                       } else {
                         setSuggestions([])
                       }
                     }}
-                    placeholder="Search for movies or TV shows..."
+                    placeholder={t.search_placeholder}
                     className="block w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-4 sm:py-6 text-base sm:text-lg bg-transparent border-0 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:ring-0 focus:outline-none transition-colors duration-300"
                   />
                   <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-2 sm:pr-6">
                     <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                      <span className="hidden sm:inline">{t.search}</span>
+                      <span className="hidden sm:inline">{t.nav_search}</span>
                       <Search className="w-4 h-4 sm:hidden" />
                     </div>
                   </button>
@@ -251,15 +251,15 @@ const HomePage: React.FC = () => {
                                         : "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
                                     }`}
                                   >
-                                    {isMovie ? t.movie : t.tv}
+                                    {isMovie ? t.content_movie_singular : t.content_tv_singular}
                                   </span>
                                 </div>
 
                                 {/* TV Show specific info */}
                                 {!isMovie && (
                                   <div className="flex items-center space-x-3 mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    <span>Seasons: {(item as any).number_of_seasons || t.n_a}</span>
-                                    <span>Episodes: {(item as any).number_of_episodes || t.n_a}</span>
+                                    <span>Seasons: {(item as any).number_of_seasons || t.content_n_a}</span>
+                                    <span>Episodes: {(item as any).number_of_episodes || t.content_n_a}</span>
                                   </div>
                                 )}
 
@@ -306,7 +306,7 @@ const HomePage: React.FC = () => {
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-300">
-              {t.trending_loading}
+                              {t.home_trending_loading}
             </p>
           </div>
         ) : (
@@ -315,7 +315,7 @@ const HomePage: React.FC = () => {
             <div className="mb-12">
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
                 <TrendingUp className="w-8 h-8 mr-3 text-pink-500" />
-                {t.trending} {t.movies}
+                {t.content_trending} {t.content_movie_plural}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                 {trendingMovies.map((movie) => (
@@ -352,7 +352,7 @@ const HomePage: React.FC = () => {
             <div>
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
                 <TrendingUp className="w-8 h-8 mr-3 text-purple-500" />
-                {t.trending} {t.tvs}
+                {t.content_trending} {t.content_tv_plural}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                 {trendingTV.map((show) => (

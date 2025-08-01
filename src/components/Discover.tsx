@@ -283,7 +283,7 @@ const Discover: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            {t.discover} {mediaType === 'all' ? t.everything : mediaType === 'movie' ? t.movies : t.tvs}
+            {t.nav_discover} {mediaType === 'all' ? t.filter_everything : mediaType === 'movie' ? t.content_movie_plural : t.content_tv_plural}
           </span>
         </h1>
 
@@ -296,7 +296,7 @@ const Discover: React.FC = () => {
           >
             <option value="movie">{t.movies}</option>
             <option value="tv">{t.tvs}</option>
-            <option value="all">{t.all}</option>
+                            <option value="all">{t.filter_all}</option>
           </select>
 
           {mediaType !== 'all' && (
@@ -305,7 +305,7 @@ const Discover: React.FC = () => {
               value={selectedGenre}
               className="px-4 py-2 rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white appearance-none"
             >
-              <option value="">{t.all} {t.genres}</option>
+                              <option value="">{t.filter_all} {t.content_genre_plural}</option>
               {genres.map(genre => (
                 <option key={genre.id} value={genre.id}>
                   {genre.name}
@@ -319,12 +319,12 @@ const Discover: React.FC = () => {
             value={sortBy}
             className="px-4 py-2 rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white appearance-none"
           >
-            <option value="popularity.desc">{t.popularity} ({t.descending_short})</option>
-            <option value="popularity.asc">{t.popularity} ({t.ascending_short})</option>
-            <option value="vote_average.desc">{t.popularity} ({t.descending_short})</option>
-            <option value="vote_average.asc">{t.rating} ({t.ascending_short})</option>
-            <option value="release_date.desc">{t.release_date} ({t.newest})</option>
-            <option value="release_date.asc">{t.release_date} ({t.oldest})</option>
+                            <option value="popularity.desc">{t.filter_popularity} ({t.filter_descending_short})</option>
+                <option value="popularity.asc">{t.filter_popularity} ({t.filter_ascending_short})</option>
+                <option value="vote_average.desc">{t.filter_popularity} ({t.filter_descending_short})</option>
+                          <option value="vote_average.asc">{t.filter_rating} ({t.filter_ascending_short})</option>
+              <option value="release_date.desc">{t.filter_release_date} ({t.filter_newest})</option>
+              <option value="release_date.asc">{t.filter_release_date} ({t.filter_oldest})</option>
           </select>
         </div>
 
@@ -334,7 +334,7 @@ const Discover: React.FC = () => {
         ) : error ? (
           <div className="text-center text-red-500">{error}</div>
         ) : pagedResults.length === 0 ? (
-          <div className="text-center text-gray-500 dark:text-gray-400">{t.no_results_found}.</div>
+                      <div className="text-center text-gray-500 dark:text-gray-400">{t.search_no_results}.</div>
         ) : (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
